@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @photo[0][:name] %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= image_tag(url_for(:action => 'get_image', :id => @photo[0][:id]), :size => '100x100') %>
+</p>
+
+
+<%= link_to 'Edit', edit_photo_path(@photo), :class => 'btn primary' %>
+<%= link_to 'Back', photos_path, :class => 'btn' %>
