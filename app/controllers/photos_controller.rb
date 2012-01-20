@@ -1,8 +1,13 @@
+
 class PhotosController < ApplicationController
+
+  include PhotosHelper
+
   # GET /photos
   # GET /photos.xml
   def index
-    @photos = Photo.all
+#    @photos = Photo.all
+    @photos = Photo.find(:all, :select => 'id, name')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -89,7 +94,10 @@ class PhotosController < ApplicationController
 
   def get_image
     @photo = Photo.find(params[:id])
-    logger.debug(@photo)
     send_data(@photo.content, :disposition => "inline", :type => @photo.mimetype)
+  end
+
+  def puzzuule
+    @divided = divide_image(params[:id])
   end
 end

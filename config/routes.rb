@@ -1,5 +1,6 @@
 Puzzuule::Application.routes.draw do
   match 'photos/get_image' => 'photos#get_image'
+  match 'photos/puzzuule' => 'photos#puzzuule'
   resources :photos
 
   # The priority is based upon order of creation:
