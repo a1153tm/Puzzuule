@@ -31,3 +31,5 @@ gem 'mysql2', '~> 0.2.11'
 # end
 
 gem 'rmagick', :require => 'RMagick'
+
+gem 'ruby-debug19'

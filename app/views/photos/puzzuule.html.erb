@@ -1,1 +1,74 @@
+<%= javascript_include_tag "jquery-1.7.1.min" %>
+<%= javascript_include_tag "jquery.ui.core" %>
+<%= javascript_include_tag "jquery.ui.widget" %>
+<%= javascript_include_tag "jquery.ui.mouse" %>
+<%= javascript_include_tag "jquery.ui.draggable" %>
+<%= javascript_include_tag "jquery.ui.droppable" %>
+
+<script>
+$(function() {
+    for(var i = 0; i < 5; i++) {
+        $("#draggable"+i).draggable();
+        $("#droppable"+i).droppable({
+            drop: function(event, ui) {
+                $( this )
+                .addClass("ui-state-highlight")
+                .find("p")
+                .html("Dropped!");
+            }
+        });
+    }
+});
+</script>
+
+<style>
+  .draggable { width: 160px; height: 160px; padding: 0.3em; float: left;}
+  .droppable { width: 170px; height: 170px; padding: 0.3em; float: left;}
+  table { width: 0%; padding: 0px 0px 0px !important; border-spacing: 0px, 0px !important; }
+  td { padding: 0px 0px 0px !important; }
+  .shelter { background-color: #FFDEAD; }
+</style>
+
+<table>
+<tbody>
+  <tr>
+    <td>
+      <div id="droppable0" class="droppable ui-widget-header">
+      <div id="draggable0" class="draggable ui-widget-content">
+        <%= image_tag(url_for(:action => 'get_image_by_path', :id => @id, :path => @divided[0])) %>
+      </div>
+      </div>
+    </td>
+    <td>
+      <div id="droppable1" class="droppable ui-widget-header">
+      <div id="draggable1" class="draggable ui-widget-content">
+        <%= image_tag(url_for(:action => 'get_image_by_path', :id => @id, :path => @divided[1])) %>
+      </div>
+      </div>
+    </td>
+    <td>
+      <div id="droppable5" class="droppable ui-widget-header shelter"><p>Here is shelter.</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div id="droppable2" class="droppable ui-widget-header">
+      <div id="draggable2" class="draggable ui-widget-content">
+        <%= image_tag(url_for(:action => 'get_image_by_path', :id => @id, :path => @divided[2])) %>
+      </div>
+      </div>
+    </td>
+    <td>
+      <div id="droppable3" class="droppable ui-widget-header">
+      <div id="draggable3" class="draggable ui-widget-content">
+        <%= image_tag(url_for(:action => 'get_image_by_path', :id => @id, :path => @divided[3])) %>
+      </div>
+      </div>
+    </td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+
 

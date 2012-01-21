@@ -7,8 +7,7 @@ class PhotosController < ApplicationController
   # GET /photos.xml
   def index
 #    @photos = Photo.all
-    @photos = Photo.find(:all, :select => 'id, name')
-
+    @photos = Photo.find(:all, :select => 'id, name, thumbnail')
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @photos }
@@ -21,7 +20,6 @@ class PhotosController < ApplicationController
      @photo = Photo.find_by_sql ["SELECT id, name FROM photos WHERE id = ?", params[:id]]
 #    @photo = Photo.select("id, name").where(params[:id])
 #    @photo = Photo.find(params[:id])
-    logger.debug(@photo)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -48,9 +46,8 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.xml
   def create
-    logger.debug(params['content'])
-#    @photo = params[:photo]
-    @photo = Photo.create(:name => params['photo']['name'], :content => params['content'].read, :mimetype => params['content'].content_type)
+    paths = create_with_thumbnail(params['content'])
+    @photo = Photo.create(:name => params['photo']['name'], :mimetype => params['content'].content_type, :path => paths[0], :thumbnail => paths[1])
     @photo.save()
 
     respond_to do |format|
@@ -92,12 +89,27 @@ class PhotosController < ApplicationController
     end
   end
 
+  def get_thumbnail
+    @photo = Photo.where(:id => params[:id]).first
+    binary = get_thumbnail_bin(@photo.thumbnail)
+    send_data(binary, :disposition => "inline", :type => @photo.mimetype)
+  end
+
   def get_image
-    @photo = Photo.find(params[:id])
-    send_data(@photo.content, :disposition => "inline", :type => @photo.mimetype)
+    @photo = Photo.where(:id => params[:id]).first
+    binary = get_image_bin(@photo.path)
+    send_data(binary, :disposition => "inline", :type => @photo.mimetype)
+  end
+
+  def get_image_by_path
+    @photo = Photo.where(:id => params[:id]).first
+    binary = get_image_bin(params[:path])
+    send_data(binary, :disposition => "inline", :type => @photo.mimetype)
   end
 
   def puzzuule
-    @divided = divide_image(params[:id])
+    photo = Photo.where(:id => params[:id]).first
+    @divided = divide_image(photo.path, params[:id])
+    @id = params[:id]
   end
 end

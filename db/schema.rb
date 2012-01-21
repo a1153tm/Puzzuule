@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120119175103) do
+ActiveRecord::Schema.define(:version => 20120121110156) do
 
   create_table "photos", :force => true do |t|
     t.string   "name"
-    t.binary   "content",    :limit => 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "mimetype"
+    t.string   "path"
+    t.string   "thumbnail"
   end
 
 end

@@ -1,5 +1,7 @@
 Puzzuule::Application.routes.draw do
   match 'photos/get_image' => 'photos#get_image'
+  match 'photos/get_image_by_path' => 'photos#get_image_by_path'
+  match 'photos/get_thumbnail' => 'photos#get_thumbnail'
   match 'photos/puzzuule' => 'photos#puzzuule'
   resources :photos
 
