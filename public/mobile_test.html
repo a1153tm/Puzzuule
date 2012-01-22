@@ -1,0 +1,18 @@
+
+<form accept-charset="UTF-8" action="/photos" class="new_photo" enctype="multipart/form-data" id="new_photo" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="PQ9XmIhZ6ME3xuXvefkP8seXzPa9Y634ga1+CgbeZCo=" /></div>
+
+  <div class="clearfix">
+    <label for="photo_name">Name</label><br />
+    <div class="input">
+      <input id="photo_name" name="photo[name]" size="30" type="text" />
+    </div>
+  </div>
+  <div class="clearfix">
+    <label for="photo_content">Content</label><br />
+    <div class="input">
+      <input id="content" name="content" type="file" />
+    </div>
+  </div>
+  <input type="hidden" id="format" name="format" value="json" />
+  <input class="btn primary" id="photo_submit" name="commit" type="submit" value="execute" />
+</form>

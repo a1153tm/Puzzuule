@@ -54,6 +54,7 @@ class PhotosController < ApplicationController
       if @photo.save
         format.html { redirect_to(@photo, :notice => 'Photo was successfully created.') }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
+        format.json { render :json => {'p_url' => "#{PUZZUULE_URL_BASE}id=#{@photo.id}"} }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @photo.errors, :status => :unprocessable_entity }

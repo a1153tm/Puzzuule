@@ -7,7 +7,6 @@
     <th></th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @photos.each do |photo| %>
@@ -15,7 +14,6 @@
     <td><%= photo.name %></td>
     <td><%= image_tag(url_for(:action => 'get_thumbnail', :id => photo.id), :size => '100x100') %></td>
     <td><%= link_to 'Show', photo %></td>
-    <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
     <td><%= link_to 'Destroy', photo, :confirm => 'Are you sure?', :method => :delete %></td>
     <td><%= link_to 'Puzzuule', :action => "puzzuule", :id => photo.id %></td>
   </tr>
